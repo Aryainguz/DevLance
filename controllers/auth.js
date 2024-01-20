@@ -47,7 +47,7 @@ exports.postRegister = async (req, res) => {
           photo: photo,
         });
 
-        verification_link = `https://devlance-by-the-xiting-way.onrender.com/verify/${token}`;
+        verification_link = `http://localhost:3000/verify/${token}`;
         const message = {
           to: email,
           from: "aryans12345678@gmail.com",

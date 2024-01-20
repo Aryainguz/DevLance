@@ -98,7 +98,15 @@ exports.getDevlanceDevlancer = async (req, res) => {
   if (token) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const the_user = await devlancer.findById(decoded._id); //getting requested user
-
+    if(the_user.accountType == "Client"){
+      const all_posts = await post.find({});
+      const all_developers = await devlancer.find({ accountType: "Developer" });
+      res.render("mainClient", {
+        the_user: the_user,
+        all_developers: all_developers,
+        all_posts: all_posts,
+      });
+    }
     const all_posts = await post.find({ owner_email: the_user.email });
     console.log(all_posts);
     if (!the_user.github_verified) {
